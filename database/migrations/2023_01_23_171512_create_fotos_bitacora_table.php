@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsuarioTable extends Migration
+class CreateFotosBitacoraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateUsuarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuario', function (Blueprint $table) {
+        Schema::create('fotos_bitacora', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_bitacora')->unsigned();
+            $table->string('url', 100);
 
-            $table->string('nombre', 50);
-            $table->string('usuario', 50);
-            $table->string('password', 255);
+            $table->foreign('id_bitacora')->references('id')->on('bitacora');
+
         });
     }
 
@@ -29,6 +30,6 @@ class CreateUsuarioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario');
+        Schema::dropIfExists('fotos_bitacora');
     }
 }
